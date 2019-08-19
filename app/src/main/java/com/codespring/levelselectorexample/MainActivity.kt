@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val volumeControl = LevelSelector(this).apply {
             maxLevels = 6
             buttonHeight = 40
@@ -24,5 +25,14 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "Clicked item $index. Current selection is $selectedIndex or $max")
         }
         main_content.addView(volumeControl)
+
+        btn_set_selection.setOnClickListener {
+            try {
+                val index = et_set_selection.text.toString().toInt()
+                volumeControl.setSelection(index)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+        }
     }
 }
