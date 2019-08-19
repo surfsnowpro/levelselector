@@ -1,5 +1,6 @@
 package com.codespring.levelselectorexample
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
             buttonHeight = 40
             buttonWidth = 40
             buttonRadius = 40f
+            selectedColor = Color.parseColor("#333333")
         }
         volumeControl.levelSelectionListener = { index, selectedIndex, max ->
             Log.d(TAG, "Clicked item $index. Current selection is $selectedIndex or $max")
