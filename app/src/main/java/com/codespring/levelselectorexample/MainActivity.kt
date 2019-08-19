@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val volumeControl = LevelSelector(this).apply {
+            maxLevels = 6
             buttonHeight = 40
             buttonWidth = 60
             buttonRadius = 17f

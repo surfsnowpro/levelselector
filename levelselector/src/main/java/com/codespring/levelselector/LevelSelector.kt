@@ -10,7 +10,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import java.util.*
 
-class LevelSelector(context: Context) : LinearLayout(context) {
+class LevelSelector(context: Context) : RelativeLayout(context) {
     private val TAG = "LevelSelector"
 
     private val buttons = ArrayList<Button>()
@@ -87,7 +87,7 @@ class LevelSelector(context: Context) : LinearLayout(context) {
 
     private fun resolveThemeColor(attrId: Int) : Int {
         val typedValue = TypedValue()
-        val colorAttr = context.theme.resolveAttribute(attrId, typedValue, true)
+        context.theme.resolveAttribute(attrId, typedValue, true)
         return typedValue.data
     }
 
@@ -122,9 +122,9 @@ class LevelSelector(context: Context) : LinearLayout(context) {
             val button = Button(context).apply {
                 id = i
                 background = bg
-                layoutParams = RelativeLayout.LayoutParams(buttonWidth, buttonHeight).apply {
+                layoutParams = LayoutParams(buttonWidth, buttonHeight).apply {
                     if (i > 0) {
-                        setMargins(buttonSpacing, 0, 0, 0)
+                        setMargins(i * (buttonSpacing + buttonWidth), 0, 0, 0)
                     }
                 }
             }
