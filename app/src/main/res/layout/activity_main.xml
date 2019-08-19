@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     android:id="@+id/main_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.codespring.levelselector.LevelSelector
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:button_height="50"
+        app:button_width="50"
+        app:button_radius="25"
+        app:button_spacing="40"
+        app:max_levels="7"
+        app:selection_style="single"
+        app:selected_color="@android:color/holo_red_dark"
+        app:unselected_color="@android:color/holo_blue_bright"
+        app:has_stroke="true"
+        >
+
+    </com.codespring.levelselector.LevelSelector>
+</LinearLayout>

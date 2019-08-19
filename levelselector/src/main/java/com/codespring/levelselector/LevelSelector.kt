@@ -3,19 +3,20 @@ package com.codespring.levelselector
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import java.util.*
 
-class LevelSelector(context: Context) : RelativeLayout(context) {
+class LevelSelector : RelativeLayout {
     private val TAG = "LevelSelector"
 
     private val buttons = ArrayList<View>()
     var levelSelectionListener: ((index: Int, selectedIndex: Int, max: Int) -> Unit)? = null
 
-    var selectionStyle: Int = MULTIPLE_LEFT_TO_RIGHT
+    var selectionStyle: Int = LEFT_TO_RIGHT
         set(value) {
             field = value
             setButtonListeners()
@@ -79,7 +80,29 @@ class LevelSelector(context: Context) : RelativeLayout(context) {
     private lateinit var colorStateList: ColorStateList
     private lateinit var strokeColorStateList: ColorStateList
 
-    init {
+    constructor(context: Context?) : super(context) { initWithAttributes(null) }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        initWithAttributes(attrs)
+    }
+
+    private fun initWithAttributes(attrs: AttributeSet?) {
+        attrs?.let {
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LevelSelector)
+
+            selectedColor = typedArray.getColor(R.styleable.LevelSelector_selected_color,
+                resolveThemeColor(R.attr.colorAccent))
+            unSelectedColor = typedArray.getColor(R.styleable.LevelSelector_unselected_color,
+                resolveThemeColor(R.attr.colorPrimary))
+            selectionStyle = typedArray.getInt(R.styleable.LevelSelector_selection_style, 12)
+            buttonWidth = typedArray.getInt(R.styleable.LevelSelector_button_width, 40)
+            buttonHeight = typedArray.getInt(R.styleable.LevelSelector_button_height, 30)
+            maxLevels = typedArray.getInt(R.styleable.LevelSelector_max_levels, 5)
+            hasStroke = typedArray.getBoolean(R.styleable.LevelSelector_has_stroke, true)
+            buttonSpacing = typedArray.getInt(R.styleable.LevelSelector_button_spacing, 10)
+            buttonRadius = typedArray.getFloat(R.styleable.LevelSelector_button_radius, 4f)
+
+            typedArray.recycle()
+        }
         updateColorLists()
         updateUI()
     }
@@ -138,8 +161,8 @@ class LevelSelector(context: Context) : RelativeLayout(context) {
             button.setOnClickListener {
                 when (selectionStyle) {
                     SINGLE -> selectedIndex = if (selectedIndex == index) -1 else index
-                    MULTIPLE_LEFT_TO_RIGHT -> selectedIndex = if (selectedIndex == index) index - 1 else index
-                    MULTIPLE_RIGHT_TO_LEFT -> selectedIndex = if (selectedIndex == index) index + 1 else index
+                    LEFT_TO_RIGHT -> selectedIndex = if (selectedIndex == index) index - 1 else index
+                    RIGHT_TO_LEFT -> selectedIndex = if (selectedIndex == index) index + 1 else index
                 }
                 levelSelectionListener?.invoke(index, selectedIndex, maxLevels)
             }
@@ -150,15 +173,15 @@ class LevelSelector(context: Context) : RelativeLayout(context) {
         buttons.forEachIndexed { index, button ->
             when (selectionStyle) {
                 SINGLE -> button.isSelected = index == selectedIndex
-                MULTIPLE_LEFT_TO_RIGHT -> button.isSelected = index <= selectedIndex
-                MULTIPLE_RIGHT_TO_LEFT -> button.isSelected = index >= selectedIndex
+                LEFT_TO_RIGHT -> button.isSelected = index <= selectedIndex
+                RIGHT_TO_LEFT -> button.isSelected = index >= selectedIndex
             }
         }
     }
 
     companion object {
-        const val MULTIPLE_LEFT_TO_RIGHT = 10
-        const val MULTIPLE_RIGHT_TO_LEFT = 11
+        const val LEFT_TO_RIGHT = 10
+        const val RIGHT_TO_LEFT = 11
         const val SINGLE = 12
     }
 }

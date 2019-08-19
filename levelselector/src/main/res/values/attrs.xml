@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LevelSelector">
+        <attr name="max_levels" format="integer"/>
+        <attr name="button_width" format="integer"/>
+        <attr name="button_height" format="integer"/>
+        <attr name="selected_color" format="color"/>
+        <attr name="unselected_color" format="color"/>
+        <attr name="has_stroke" format="boolean"/>
+        <attr name="button_spacing" format="integer"/>
+        <attr name="button_radius" format="float"/>
+        <attr name="selection_style" format="enum">
+            <enum name="single" value="12"/>
+            <enum name="left_to_right" value="10"/>
+            <enum name="right_to_left" value="11"/>
+        </attr>
+    </declare-styleable>
+</resources>
