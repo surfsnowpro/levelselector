@@ -21,4 +21,18 @@ val volumeControl = LevelSelector(this).apply {
     buttonRadius = 17f
 }
 ```
+## Installation
+``` gradle
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+    
+    
+dependencies {
+    implementation 'com.github.surfsnowpro:levelselector:0.1.0'
+}
+```
 
