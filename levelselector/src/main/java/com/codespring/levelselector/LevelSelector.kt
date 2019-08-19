@@ -4,16 +4,15 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
-import android.widget.Button
-import android.widget.LinearLayout
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import java.util.*
 
-class LevelSelector(context: Context) : LinearLayout(context) {
+class LevelSelector(context: Context) : RelativeLayout(context) {
     private val TAG = "LevelSelector"
 
-    private val buttons = ArrayList<Button>()
+    private val buttons = ArrayList<View>()
     var levelSelectionListener: ((index: Int, selectedIndex: Int, max: Int) -> Unit)? = null
 
     var selectionStyle: Int = MULTIPLE_LEFT_TO_RIGHT
@@ -87,7 +86,7 @@ class LevelSelector(context: Context) : LinearLayout(context) {
 
     private fun resolveThemeColor(attrId: Int) : Int {
         val typedValue = TypedValue()
-        val colorAttr = context.theme.resolveAttribute(attrId, typedValue, true)
+        context.theme.resolveAttribute(attrId, typedValue, true)
         return typedValue.data
     }
 
@@ -119,17 +118,17 @@ class LevelSelector(context: Context) : LinearLayout(context) {
                 }
             }
 
-            val button = Button(context).apply {
+            val view = View(context).apply {
                 id = i
                 background = bg
-                layoutParams = RelativeLayout.LayoutParams(buttonWidth, buttonHeight).apply {
+                layoutParams = LayoutParams(buttonWidth, buttonHeight).apply {
                     if (i > 0) {
-                        setMargins(buttonSpacing, 0, 0, 0)
+                        setMargins(i * (buttonSpacing + buttonWidth), 0, 0, 0)
                     }
                 }
             }
-            buttons.add(button)
-            addView(button)
+            buttons.add(view)
+            addView(view)
         }
         setButtonListeners()
     }
