@@ -32,7 +32,7 @@ allprojects {
     
     
 dependencies {
-    implementation 'com.github.surfsnowpro:levelselector:0.1.0'
+    implementation 'com.github.surfsnowpro:levelselector:x.y.z'
 }
 ```
 
