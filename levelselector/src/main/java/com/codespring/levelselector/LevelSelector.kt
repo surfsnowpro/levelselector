@@ -10,7 +10,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import java.util.*
 
-class LevelSelector : RelativeLayout {
+open class LevelSelector : RelativeLayout {
     private val TAG = "LevelSelector"
 
     private val buttons = ArrayList<View>()
