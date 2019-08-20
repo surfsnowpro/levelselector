@@ -10,7 +10,7 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import java.util.*
 
-class LevelSelector : RelativeLayout {
+open class LevelSelector : RelativeLayout {
     private val TAG = "LevelSelector"
 
     private val buttons = ArrayList<View>()
@@ -64,8 +64,8 @@ class LevelSelector : RelativeLayout {
             updateUI()
         }
 
-    private var selectedIndex = 0
-        set(value) {
+    var selectedIndex = 0
+        private set(value) {
             field = value
             updateButtonSelections()
         }
@@ -154,6 +154,11 @@ class LevelSelector : RelativeLayout {
             addView(view)
         }
         setButtonListeners()
+    }
+
+    fun setSelection(index: Int) {
+        if (index >= buttons.size) return
+        selectedIndex = if (index < 0) -1 else index
     }
 
     private fun setButtonListeners() {

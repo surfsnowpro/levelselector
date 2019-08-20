@@ -10,6 +10,18 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/et_set_selection"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        />
+    <Button
+        android:id="@+id/btn_set_selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Selection"
+        />
 
     <com.codespring.levelselector.LevelSelector
         android:layout_width="wrap_content"
