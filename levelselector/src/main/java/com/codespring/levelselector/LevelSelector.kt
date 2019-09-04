@@ -142,7 +142,7 @@ open class LevelSelector : RelativeLayout {
             }
 
             val view = View(context).apply {
-                id = i
+//                id = i
                 background = bg
                 layoutParams = LayoutParams(buttonWidth, buttonHeight).apply {
                     if (i > 0) {
